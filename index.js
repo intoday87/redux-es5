@@ -7,10 +7,7 @@ var incrementReducer = function (state, action) {
 		case 'INCREMENT':
 			return state + 1;
 		default:
-			if (!state) {
-				return 0;
-			}
-			return state;
+			return !state ? 0 : state;
 	}
 };
 var messageReducer = function (state, action) {
@@ -22,16 +19,13 @@ var messageReducer = function (state, action) {
 				message: action.message
 			};
 		default:
-			if (!state) {
-				return "";
-			}
-			return state;
+			return !state ? "empty message" : state;
 	}
 };
 
 var reducer = redux.combineReducers({
-	incrementReducer : incrementReducer,
-	messageReducer : messageReducer
+	incrementReducer: incrementReducer,
+	messageReducer  : messageReducer
 });
 var store = redux.createStore(reducer);
 
@@ -47,9 +41,9 @@ var incrementActionCreator = function () {
 };
 var messageActionCreator = function (message) {
 	return {
-		type: 'MESSAGE',
-		message : message
-	};	
+		type   : 'MESSAGE',
+		message: message
+	};
 };
 console.log(store.dispatch(incrementActionCreator()));
 console.log(store.dispatch(messageActionCreator('new message')));
