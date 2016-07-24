@@ -27,7 +27,10 @@ var reducer = redux.combineReducers({
 	incrementReducer: incrementReducer,
 	messageReducer  : messageReducer
 });
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, {
+	incrementReducer: 10,
+	messageReducer  : 'saved message'
+});
 
 console.log(store.getState());
 
@@ -45,6 +48,10 @@ var messageActionCreator = function (message) {
 		message: message
 	};
 };
+
+console.log('dispatch incrementActionCreator: ');
 console.log(store.dispatch(incrementActionCreator()));
+console.log("dispatch messageActionCreator('new message'): ");
 console.log(store.dispatch(messageActionCreator('new message')));
+console.log('dispatch incrementActionCreator: ');
 console.log(store.dispatch(incrementActionCreator()));
